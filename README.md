@@ -230,7 +230,7 @@ SLI aggregated over a long time period is needed to make a decision on the valid
 <h3>Measuring SLIs</h3>  
 Order of User Proximity: from low to high
 
-1. **Processing server side request logs**
+1. **Processing server side request logs (farthest from user)**
     1. Request backfill SLI logs. Get retroactive data to build a model prior to conception.
     2. Convoluted logs (data stitching), processing jobs, etc. can be stitched together and exported as a refined “good event” counter.
     3. Note: ingestion and processing will add significant latency between event TO observation in SLI.
@@ -258,7 +258,7 @@ Order of User Proximity: from low to high
     3. Con: Measurement latency. Drain users mobile battery life. Causes trust issues.
     4. Not good for emergency responses.
 
-5. **Measuring at the client.**
+5. **Measuring at the client (nearest to user)**
     1. Capture events that are outside the scope of your application. (Hardware issues, thanks Apple).
     2. Can drop the signal to noise ration significantly.
     3. Would force you to have to drop your SLO.
