@@ -64,13 +64,13 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 <h3>Triangle of Success - R.A.S.</h3>
 
-**Reliability** - % of time that the system functions properly for the user.
-**Availability** - % of time that the system is up and running.
-**Scalability** - # of users that the system can serve reliably.
+**Reliability** - % of time that the system functions properly for the user.  
+**Availability** - % of time that the system is up and running.  
+**Scalability** - # of users that the system can serve reliably.  
 
-- Availability is non-linearly related to customer happiness.
-- Availability is inversely proportional to the ability to push out new features.
-- Reliability can be increased by decreasing the dev release cycle, increasing testing, and more manual analysis.
+- Availability is non-linearly related to customer happiness.  
+- Availability is inversely proportional to the ability to push out new features.  
+- Reliability can be increased by decreasing the dev release cycle, increasing testing, and more manual analysis.  
 
 **Never Want 100%** - The marginal cost to make an already reliable system more reliable often times exceeds the value of delivering this to the customers.
 
@@ -105,10 +105,10 @@ Value to customers in this case could be thought of the probability that new cus
 
 <h3>Error Budgets</h3>
 
-- Requires executive buy-in.
-- Balance reliability with feature velocity.
+- Requires executive buy-in  
+- Balance reliability with feature velocity  
 
-`Error Budget = 1 - SLO`
+`Error Budget = 1 - SLO`  
 
 `Allowed Downtime = SLO * 28 (days) * 24 (hours/day) * 60 (minutes/hour)`
 
@@ -118,7 +118,7 @@ Value to customers in this case could be thought of the probability that new cus
 
 *Example*: To improve reliability of a new feature incorporated into a system you could find that it will cost 10x the previous amount to ensure that the new system is reliable.
 
-**Advanced Error Budget Topics**:
+**Advanced Error Budget Topics**:  
 
 *“Dynamic release cadence”* 
 - Throttle back the grip on disallowing features to be released due to an error budget that was overly frugal.
@@ -129,7 +129,7 @@ Value to customers in this case could be thought of the probability that new cus
 *“Budget based alerts”* 
 - Send alert if recent errors are > X% of your monthly budget.
 
-*“Silver Bullets”* 
+*“Silver Bullets”*  
 - Error budget is already out. SRE doesn’t want to support the new feature. SWE says new feature is vital to company and has N-silver bullets. The SWE would have to have seniority and use one of their silver bullets in this case. DO NOT ROLLOVER.
 
 ⚠️ ️️️Silver Bullets are treated as a failure and would require a postmortem ⚠️. 
@@ -144,7 +144,7 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 **How to make devs happy?** 
 - Integration testing, automated canary analysis (ACA), rollback.
 
-**How to reduce scale of failure amongst users?**
+**How to reduce scale of failure amongst users?**  
  - Route traffic to a small percentage of users with a new image and study how the system responds to the changes. This is also a great way to discover and eliminate SPOF (single point of failure).
 
 *TTD* - Time to detect an issue in a system.
@@ -155,10 +155,10 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 
 `Error Impact (TBF) = (TTD + TTR) * impact (%) / TTF`
 
-**How to improve reliability?**
+**How to improve reliability?**  
 - Reduce numerator OR increase denominator
 
-**How to improve TTD?**
+**How to improve TTD?**  
 - Implement systems to get alerts to the right person faster (reduce detection time).
 
 **How to improve TTR?** 
@@ -170,7 +170,7 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 **How to improve impact % ?** 
 - Implement system to roll out new features to a very small set of users (note: Find users that fall within *DAU* and are not your “core” user base. Find users that you “can afford to lose” and test it on them.) Give changes time to bake.
 
-**How to reduce TTF?** 
+**How to reduce TTF?**  
 - Decrease the probability that a failure ever happens again. 
 
 *Example*: re-routing traffic from a failed region over to a region that is healthy.
@@ -181,13 +181,9 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 <h3>Reliability Operations Best Practices</h3>
 
 - Periodically report the worst customers, worst region, uneven error budget distribution. Focus extra hard on those regions.
-
 - Standardize infrastructure.
-
 - Consult SWE on system design.
-
 - Rollback speed.
-
 - Phased rollouts.
 
 
@@ -197,14 +193,11 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 
 - Think about the reliablility from the *users* point of view.
 
-**How to measure the happiness?** 
+**How to measure the happiness?**  
 
 - We define a SLI and measure how it changes over time.
-
 - We want an SLI that has a linear relationship (predictable) with the happiness of the users.
-
 - Predictability is very important because you will be making engineering changes based on the data.
-
 - Relationship between latency and user happiness is an “S” curve (non-linear).
 
 *Example*: Website is slow to load or respond to other embedded features. User leaves site. Count up the speed and the quantity of users that left the site in this window of time as a ratio of users that didn’t. You will have a quantified metric of how unhappy the event made users.
@@ -343,9 +336,8 @@ Probably pretty high. A system can be optimized for this if we find a great coor
 
 **Main topics**: Freshness, correctness, coverage, and throughput.
 
-**Freshness**:
+**Freshness**:  
 - Output freshness decay as a function of time and user input data. Utility is what mainly diminishes.
-
 - Users expect that those outputs are up to date and are not aware of the degradation over time. Data pipelines have to be constantly rebuilt and checked to ensure they meet the freshness threshold.
 
 **Freshness SLI**: Ratio of valid data updated frequency beyond threshold X.
@@ -382,7 +374,7 @@ _**Throughput SLI**_:
 
 `Throughput = events / time`
 
-*Throughput thresholds (GB/s)*: 
+*Throughput thresholds (GB/s)*:  
 - Best Effort (slow)
 - Guaranteed (expected)
 - Expedited (exceeded)
@@ -396,12 +388,12 @@ _**Throughput SLI**_:
 
 ⚠️ Only need 1-3 SLIs for each part of the user journey. ⚠️
 
-**Why?**
+**Why?**  
 - Not all metrics are good SLIs
 - Don’t overload the SREs
 - Don’t want to create conflicting signals. Harder to solve problems.
 
-*Example*:
+*Example*:  
 - *SLI*: Something broke.
 - *Metrics*: **This** broke.
 
@@ -437,18 +429,17 @@ These user actions are nothing more than web requests so we have latency and ava
 
 <h3>Bucketing</h3>
 
-*Problem*:
+*Problem*:  
 - Varying thresholds for relevant SLOs (latency, freshness, throughput) increases complexity significantly.
 
-*Solution*:
+*Solution*:  
 - Use “bucketed” thresholds to reduce complexity.
 
-*Assumptions*:
+*Assumptions*:  
 - You can identify the requests correctly. Don’t have a CPU bottleneck (bucketing will bog down the speed).
 
-*Note*:
+*Note*:  
 - In distributed systems consistent writes have different latency than reads.
-
 - Google has found that users are ok with slower write speeds (such as hitting the “submit” button). BUT, users expect FAST read speeds.
 
 *Example thresholds*:
@@ -466,14 +457,14 @@ These user actions are nothing more than web requests so we have latency and ava
 
 <h3>Creating Realistic SLO Targets</h3>
 
-*Google’s SLI Philosophy*: 
+*Google’s SLI Philosophy*:  
 - User expectations are strongly tied to past performance. If a service was 10/10 last quarter and this quarter it is 7/10 the user will really experience that service as something like a 5-6/10.
 
-*Problem*:
+*Problem*:  
 - New companies don’t have tons of data to work off of. Hard to set SLOs when there is no data to use.
 Solution: Do nothing for now and just work on gathering data.
 
-*Notes*:
+*Notes*:  
 - Never assume users are OK with status quo. Use data to drive decision making.
 
 
@@ -481,10 +472,10 @@ Solution: Do nothing for now and just work on gathering data.
 
 <h3>Continuous Improvement</h3>
 
-*Aspirational Targets*:
+*Aspirational Targets*:  
 - These are what the business needs.
 
-*Achievable Targets*:
+*Achievable Targets*:  
 - Achievable based on past performance.
 - SLOs are dynamic in nature.
 
@@ -493,11 +484,8 @@ Solution: Do nothing for now and just work on gathering data.
 <h3>Developing SLOs and SLIs</h3>
 
 1. Figure out SLI types & architect high level spec.
-
 2. Describe in great detail the events being measured. Where/How the SLI will be measured?
-
 3. Walk through user journey (trace through architecture) and identify coverage gaps. Document points of failure extensively. High risk failure points indicate a re-work needed.
-
 4. Set SLO targets. Set measurement windows to gather performance data.
 
 
@@ -505,23 +493,16 @@ Solution: Do nothing for now and just work on gathering data.
 <h5>Example (Video Game System)</h5>
 
 - You have a video game that has 50MM 30-day-trial *DAU* playing.
-
 - Average 1-10MM users online at any give time.
-
 - 1 new world each month added that causes traffic and revenue spikes.
-
 - Largest revenue stream = real world ($$) -> game currency ($)
-
 - 2nd largest revenue stream = PvP battles, mini-games, resource production.
-
 - Largest player expense = settlement upgrades, defensive weapons for battles, setting up recruitment for other players to join them, etc.
-
 - Mobile client & web UI applications.
 
-**Mobile Client**
+**Mobile Client**  
 
 - *HTTP Requests*: JSON-RPC messages over REST HTTP.
-
 - *Socket*: Open web-socket to receive game updates.
 
 **Web**
@@ -537,17 +518,13 @@ Solution: Do nothing for now and just work on gathering data.
 <h3>Example (Profile Page)</h3>
 
 - Use a sequence diagram to plan out the client <-> server interactions done by the infrastructure.
-
 - *Client*: Requests the profile URL over HTTPS.
 
 
 - *Web Server*:
     - Send HTML in response. 
-    
     - Service the user's profile data from the user profile data store.
-
     - Render the leaderboard for the players location using latitude/longitude data.
-
     - Build the HTML response for player and send back to client.
 
 - *CDN*: Content delivery network will automatically serve the CSS/JavaScript via HTML response.
@@ -561,7 +538,6 @@ Solution: Do nothing for now and just work on gathering data.
 *Steps*:
 
 - How do you want to measure the performance of the service against users expectations.
-
 - The user interaction is a request-response interaction so we want to **measure availability**.
 
 - **Measuring Availability**:
@@ -607,9 +583,7 @@ Solution: Do nothing for now and just work on gathering data.
 
 - Create a *probe* that:
     1. Inspects the *HTTP* response body.
-
     2. Validates load balancer routes.
-
     3. Tests CDN serving data.
 
 
@@ -619,9 +593,7 @@ Solution: Do nothing for now and just work on gathering data.
 **System Analysis**:
 
     - Ignore the front end SLIs since we know these have visibility issues.
-
     - Ignore the client side (CDN) since it's only used for ads and analytics.
-
     - Focus on the core backend infrastructure.
 
 *Focus*:
@@ -639,13 +611,11 @@ This bad code would have to get past **(i)** the `OK` response header and **(ii)
 *Focus*:
 
     - Focus on a middle ground solution. You don't have to send them a failure code if you can't get the leaderboard to send.
-
     - You can serve the user a partial response in the event of a failure to lookup.
 
 *Focus*:
 
     - The prober (sitting at the front end) won't catch the case where the wrong user profile is served.
-
     - This is a huge issue and you'd want to measure this.
 
 
@@ -655,9 +625,7 @@ This bad code would have to get past **(i)** the `OK` response header and **(ii)
 *Focus*:
 
     - Find all possible risks.
-
     - Estimate their cost to the error budget.
-
     - If total cost > error budget (SLO targets) need to follow Pareto Principle and solve the most vital ones first.
 
 
@@ -667,11 +635,8 @@ This bad code would have to get past **(i)** the `OK` response header and **(ii)
 Everyone in your organization working on the *service*, *product managers*, *developers*, *SREs* and *executives* needs to know the following:
 
     - Where the line is (SLO/SLI)
-
     - What happens if it's crossed (SLA)
-
     - Exceptions to standard measuring procedures.
-
     - Set owners for each SLO.
 
 There should be historical data on previous SLOs and documentation to show why each SLO was changed.
@@ -691,21 +656,13 @@ Capture all of your metadata in one place in the version controlled *configurati
 *Important Metadata Features*:
 
     - Measurement Window: Defines the time period of each data "chunk measured" before restart.
-
     - Graph Duration: The time period that a SRE would see on their dashboard GUI.
-
     - Target: The availability target that your want to maintain.
-
     - Owner: The person that owns the product or service. (Product Manager for example)
-
     - Contacts: Top down contacts on the product/service. (Tech Lead -> SRE)
-
     - Status: The status of the service.
-
     - Rationale: What results from the SLI being triggered. (The negative externalities)
-
     - References: Links to any relevant internal notes around this service.
-
     - Changelog: A record of any changes made to the service's SLI/SLO.
 
 
@@ -715,19 +672,14 @@ Capture all of your metadata in one place in the version controlled *configurati
 *7 Characteristics*:
 
     - Result in engineering efforts to improve reliability if error budget is spent.
-
     - Quantitatively describe WHEN the error budget will kick in.
-
     - Quantitatively describe HOW the error budget will kick in. Specifically how the Dev/SRE teams will respond.
-
     - Set in place consequences if the SLO consistently fails over a long time horizon.
 
     Example: devs that sacrifice reliability for features should be let go.
 
     - Policy is a consistently applied set of rules.
-
     - Document who disagreements get escalated to.
-
     - Policy should be agreed upon and signed off by all parties.
 
 
@@ -737,11 +689,8 @@ Capture all of your metadata in one place in the version controlled *configurati
 *Steps*:
 
     - Increase consequences w.r.t. increased levels of error budget burn.
-
     - Developers and SREs must work together to push out new features to the user while mainting the reliability. This is impossible to do all the time so it's a constant balance.
-
     - SREs want to help the SWEs develop more features safely. Want to have alligened incentives. This is the only way that SRE will work in an organization.
-
     - Examples consequence: Pulling back the reins on feature releases. This will be a consequence to the devs for breaking the codebase which annoyed the users.
 
 
@@ -759,9 +708,7 @@ Capture all of your metadata in one place in the version controlled *configurati
 *Threshold 3*:
 
     - 30-day error budget has been spent without a root cause figured out. All feature releases will be blocked as a consequence and dev will need to interlock with SRE to fix the issue.
-
     - The changes are bundled up into a weekly hotfix patch.
-
     - DO NOT cut a new release from the devlopment branch.
 
 *Threshold 4*:
@@ -775,7 +722,6 @@ Capture all of your metadata in one place in the version controlled *configurati
 *Scenario*:
 
     - Availability SLO: 99.9% over past 30 days.
-
     - Bug causes 99.85% availability (0.15% of the time serves errors)
 
 *Resolution*:
