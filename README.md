@@ -227,7 +227,8 @@ SLI aggregated over a long time period is needed to make a decision on the valid
 
 
 
-<h3>Measuring SLIs (Order of User Proximity HI->LOW)</h3>
+<h3>Measuring SLIs</h3>  
+Order of User Proximity: from low to high
 
 1. **Processing server side request logs**
     1. Request backfill SLI logs. Get retroactive data to build a model prior to conception.
