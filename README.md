@@ -51,9 +51,9 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 **SLI (Service Level Indicators)** - The metrics you define to quantitatively measure your system performance.
 
-*Example*: `Error Rate (Network Health) - (success / total requests) * 100`
+*Example*: `Error Rate (Network Health) = (success / total requests) * 100`
 
-*Example*: `Error Rate (Network Health) - (success / throughput) * 100`
+*Example*: `Error Rate (Network Health) = (success / throughput) * 100`
 
 **Measuring Reliability (Edge Case)** - Not every organization and/or system is linear. There are cases when you will need exponentially better service to a customer versus your standard service you normally offer.
 
