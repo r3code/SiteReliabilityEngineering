@@ -25,8 +25,7 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 <h3>SLOs</h3>
 
-**SLO (Service Level Objective)** - A quantitative measurement of time or quantity of actions that must take place to enter SLA (repercussions). Internal thresholds set to alert the SLA violation. Quantitatively stronger than SLA. Services can have multiple SLO’s.
-
+**SLO (Service Level Objective)** - a quantitative measurement of time or quantity of actions that must take place to enter SLA (repercussions). Internal thresholds set to alert the SLA violation. Quantitatively stronger than SLA. Services can have multiple SLO’s.
 
 *Example*: HTTP (SLO) 200ms. If a request takes longer than 200ms you will enter SLA (usually financial repercussions). An SRE engineer needs to be able to anticipate (ideally) or remedy (more common) a failed SLO.
 
@@ -35,12 +34,12 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 <h3>SLAs</h3>
 
-**SLA (Service Level Agreement)** - Essentially the consequences of a failed SLO. Usually comes in the form of direct or indirect monetary compensation.
+**SLA (Service Level Agreement)** - essentially the consequences of a failed SLO. Usually comes in the form of direct or indirect monetary compensation.
 
 
 *Example*: GCP breaks their HTTP SLO. GCP reimburses the company with $100 in cloud credits.
 
-**The Happiness Test** - The minimum threshold to ensure that customers are happy.
+**The Happiness Test** - the minimum threshold to ensure that customers are happy.
 
 
 
@@ -49,13 +48,14 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 *Example*: Netflix - Playback latency (HTTP). Packet loss in the middle of a video.
 
-**SLI (Service Level Indicators)** - The metrics you define to quantitatively measure your system performance.
+**SLI (Service Level Indicators)** - the metrics you define to quantitatively measure your system performance.
 
 *Example*: `Error Rate (Network Health) = (success / total requests) * 100`
 
 *Example*: `Error Rate (Network Health) = (success / throughput) * 100`
 
-**Measuring Reliability (Edge Case)** - Not every organization and/or system is linear. There are cases when you will need exponentially better service to a customer versus your standard service you normally offer.
+**Measuring Reliability (Edge Case)**  
+Not every organization and/or system is linear. There are cases when you will need exponentially better service to a customer versus your standard service you normally offer.
 
 *Example*: Black Friday - It is expected that Company Y will have an N% increase in their website (read: client) and thus will require X% increase in the “triangle of success”.
 
@@ -64,18 +64,19 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 
 <h3>Triangle of Success - R.A.S.</h3>
 
-**Reliability** - % of time that the system functions properly for the user.  
-**Availability** - % of time that the system is up and running.  
-**Scalability** - # of users that the system can serve reliably.  
+1. **Reliability** - percentage of time that the system functions properly for the user.  
+2. **Availability** - percetage of time that the system is up and running.  
+3. **Scalability** - number of users that the system can serve reliably.  
 
-- Availability is non-linearly related to customer happiness.  
-- Availability is inversely proportional to the ability to push out new features.  
+- Availability is:
+  - non-linearly related to customer happiness.  
+  - inversely proportional to the ability to push out new features.  
 - Reliability can be increased by decreasing the dev release cycle, increasing testing, and more manual analysis.  
 
-**Never Want 100%** - The marginal cost to make an already reliable system more reliable often times exceeds the value of delivering this to the customers.
+**Never Want 100%**  
+The marginal cost to make an already reliable system more reliable often times exceeds the value of delivering this to the customers.  
 
-Marginal cost in this case is how much it would cost (engineer time, compute cost, etc.) to make a proposed change.
-
+Marginal cost in this case is how much it would cost (engineer time, compute cost, etc.) to make a proposed change.  
 Value to customers in this case could be thought of the probability that new customers use the service due to proposed change and/or the probability of risk that you will lose a customer.
 
 
@@ -98,7 +99,8 @@ Value to customers in this case could be thought of the probability that new cus
 
 <h3>Iteration Process</h3>
 
-- Review a new SLO after 3 months. Follow up review after 6-12 months.
+- Review a new SLO after 3 months
+- Follow up review after 6-12 months
 
 
 
@@ -112,7 +114,8 @@ Value to customers in this case could be thought of the probability that new cus
 
 `Allowed Downtime = SLO * 28 (days) * 24 (hours/day) * 60 (minutes/hour)`
 
-⚠️ The single largest source of outages is change to a system. New features = lower service availability.
+⚠️ The single largest source of outages is change to a system. 
+> New features = lower service availability.
 
 *Note*: non-linear correlation between the relationship of new features and lowered service.
 
@@ -142,36 +145,34 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 <h3>Trade-Off Theory</h3>
 
 **How to make devs happy?** 
-- Integration testing, automated canary analysis (ACA), rollback.
+Integration testing, automated canary analysis (ACA), rollback.
 
 **How to reduce scale of failure amongst users?**  
- - Route traffic to a small percentage of users with a new image and study how the system responds to the changes. This is also a great way to discover and eliminate SPOF (single point of failure).
+Route traffic to a small percentage of users with a new image and study how the system responds to the changes. This is also a great way to discover and eliminate SPOF (single point of failure).
 
-*TTD* - Time to detect an issue in a system.
-
-*TTR* - Time to resolve the issue in the system.
-
-*TTF* - Time elapsed between failures.
+- *TTD* - Time to detect an issue in a system.
+- *TTR* - Time to resolve the issue in the system.
+- *TTF* - Time elapsed between failures.
 
 `Error Impact (TBF) = (TTD + TTR) * impact (%) / TTF`
 
 **How to improve reliability?**  
-- Reduce numerator OR increase denominator
+Reduce numerator OR increase denominator
 
 **How to improve TTD?**  
-- Implement systems to get alerts to the right person faster (reduce detection time).
+Implement systems to get alerts to the right person faster (reduce detection time).
 
 **How to improve TTR?** 
-- Implement systems to fix outages faster. 
+Implement systems to fix outages faster. 
 
 
 *Examples*: develop a playbook, increased data parsing and log analysis. Take a failed zone offline and redirect traffic to an available zone while the affected zone is getting repaired.
 
 **How to improve impact % ?** 
-- Implement system to roll out new features to a very small set of users (note: Find users that fall within *DAU* and are not your “core” user base. Find users that you “can afford to lose” and test it on them.) Give changes time to bake.
+Implement system to roll out new features to a very small set of users (note: Find users that fall within *DAU* and are not your “core” user base. Find users that you “can afford to lose” and test it on them.) Give changes time to bake.
 
 **How to reduce TTF?**  
-- Decrease the probability that a failure ever happens again. 
+Decrease the probability that a failure ever happens again. 
 
 *Example*: re-routing traffic from a failed region over to a region that is healthy.
 
@@ -191,7 +192,7 @@ There can be a silver bullet tax, if a bullet used SWE must use the next develop
 
 <h3>Quantifying User Satisfaction</h3>
 
-- Think about the reliablility from the *users* point of view.
+Think about the reliablility from the *users* point of view.
 
 **How to measure the happiness?**  
 
@@ -270,8 +271,8 @@ SLI aggregated over a long time period is needed to make a decision on the valid
 
 *Data Processing*: Coverage, correctness, freshness, throughput.
 
-*Storage*: Measure the durability of the storage layer.
-- Not a great metric since most data will not be lost unless there is a complete catastrophe
+*Storage*: Measure the durability of the storage layer.  
+Not a great metric since most data will not be lost unless there is a complete catastrophe
 
 
 
@@ -280,7 +281,7 @@ SLI aggregated over a long time period is needed to make a decision on the valid
 
 *HTTP(S)*: Parameters include host name, requested path to set the scope to a set of tasks or response handlers.
 
-*Problem with HTTP Status Code(s)*: 
+*Problem with HTTP Status Code(s)*:  
 - You could have a 2xx status code (success) and the request body could be null. This would fail for the user. 
 - Error visibility in the JSON body only you would have to do parsing to ensure that it was successful.
 
@@ -293,7 +294,7 @@ SLI aggregated over a long time period is needed to make a decision on the valid
 **Which of the requests that are served are valid for the SLI?**
 
 **How can you tell if the request was served with degrading quality?**
-- The mechanism that the system uses to degrade quality should mark responses as such.
+The mechanism that the system uses to degrade quality should mark responses as such.
 
 
 *Example*: Availability of a VM - proportion of minutes that it was booted and availably via SSH. 
@@ -308,7 +309,7 @@ Probably pretty high. A system can be optimized for this if we find a great coor
 
 *Example*: When it’s ok to only sample ~75% of the requests?
 
-- When you have a cache in front of the service -> bimodal distribution of response latencies (double peak with one local maximum and a global maximum).
+When you have a cache in front of the service -> bimodal distribution of response latencies (double peak with one local maximum and a global maximum).
 
 *Latency* 
 - The proportion of work-queue tasks that are faster than threshold X. 
@@ -342,10 +343,10 @@ Probably pretty high. A system can be optimized for this if we find a great coor
 
 **Freshness SLI**: Ratio of valid data updated frequency beyond threshold X.
 
-- Time is measured as the duration between data input to batch process (t=0) and then process outputs to some other mechanism `(t=N)`. Freshness the time since this completion.
+Time is measured as the duration between data input to batch process (t=0) and then process outputs to some other mechanism `(t=N)`. Freshness the time since this completion.
 
 **Streaming (continuous processing)**: 
-- Watermarked timestamp that tells the freshness as a function of time. (Time Series Data)
+Watermarked timestamp that tells the freshness as a function of time. (Time Series Data)
 
 *Example*: 1/5 streaming shards slow (latency is not within threshold) therefore 20% of data is stale.
 
@@ -430,13 +431,13 @@ These user actions are nothing more than web requests so we have latency and ava
 <h3>Bucketing</h3>
 
 *Problem*:  
-- Varying thresholds for relevant SLOs (latency, freshness, throughput) increases complexity significantly.
+Varying thresholds for relevant SLOs (latency, freshness, throughput) increases complexity significantly.
 
 *Solution*:  
-- Use “bucketed” thresholds to reduce complexity.
+Use “bucketed” thresholds to reduce complexity.
 
 *Assumptions*:  
-- You can identify the requests correctly. Don’t have a CPU bottleneck (bucketing will bog down the speed).
+You can identify the requests correctly. Don’t have a CPU bottleneck (bucketing will bog down the speed).
 
 *Note*:  
 - In distributed systems consistent writes have different latency than reads.
@@ -458,14 +459,14 @@ These user actions are nothing more than web requests so we have latency and ava
 <h3>Creating Realistic SLO Targets</h3>
 
 *Google’s SLI Philosophy*:  
-- User expectations are strongly tied to past performance. If a service was 10/10 last quarter and this quarter it is 7/10 the user will really experience that service as something like a 5-6/10.
+User expectations are strongly tied to past performance. If a service was 10/10 last quarter and this quarter it is 7/10 the user will really experience that service as something like a 5-6/10.
 
 *Problem*:  
-- New companies don’t have tons of data to work off of. Hard to set SLOs when there is no data to use.
+New companies don’t have tons of data to work off of. Hard to set SLOs when there is no data to use.
 Solution: Do nothing for now and just work on gathering data.
 
 *Notes*:  
-- Never assume users are OK with status quo. Use data to drive decision making.
+Never assume users are OK with status quo. Use data to drive decision making.
 
 
 
@@ -571,9 +572,7 @@ Solution: Do nothing for now and just work on gathering data.
 **Reflection Questions**:
 
 - Do the SLIs capture the entire user journey and failures?
-
 - What are the edge cases and exceptions?
-
 - Do the SLIs capture all journey permutations?
 
 
