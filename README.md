@@ -1,6 +1,6 @@
 # Site Reliability Engineering Notes
 
-This is an ongoing list of notes on SRE I've learned over the past couple of years.
+This is an ongoing list of notes on SRE I've learned over the past years.
 
 I pay careful attention to metrics and the math behind them 👨‍🔬
 
