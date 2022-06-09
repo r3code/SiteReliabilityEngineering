@@ -11,7 +11,7 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 * [Reliability Mathematics](https://www.reliabilityeducation.com/reliabilityeducation/ReliabilityPredictionBasics.pdf)
 * [The 'S' Curve (Preface)](https://www.insanegrowth.com/podcast-google-s-curve-theory/)
 * [The 'S' Curve (Math)](https://en.wikipedia.org/wiki/Sigmoid_function)
-*[How Complex Systems Fail (Chicago)](http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf)
+* [How Complex Systems Fail (Chicago)](http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf)
 * [Google SRE Coding Questions](https://careercup.com/page?pid=google-interview-questions&job=site-reliability-engineer-interview-questions)
 * [Path to SRE (manager)](https://danrl.com/blog/2019/path-to-srm/)
 * [MIT 6.033 Systems Engineering](http://web.mit.edu/6.033/www/)
@@ -21,6 +21,7 @@ I pay careful attention to metrics and the math behind them 👨‍🔬
 * [Steps to Analyze a System](http://www.brendangregg.com/methodology.html)
 * [Squadcast's blog on SRE best practices](https://www.squadcast.com/categories/sre)
 * [Gremlin SRE materials](https://www.gremlin.com/site-reliability-engineering/) 
+* [Google SRE Lessons Blog](https://cloud.google.com/blog/products/devops-sre/sre-at-google-our-complete-list-of-cre-life-lessons)
 
 <h3>SLOs</h3>
 
